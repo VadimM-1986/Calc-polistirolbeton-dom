@@ -1,6 +1,8 @@
 ﻿using PolistirolbetonDomCalc.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,24 +13,41 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace PolistirolbetonDomCalc
 {
 
     public partial class MainWindow : Window
     {
+        // Передаем Id услуги
+        const int KOMPLEKT_ID = 1;
+        const int PROEKT_ID = 2;
+        const int GEOLOGI_ID = 3;
+        const int GEODEZ_ID = 4;
+        const int MONTAJDOM_ID = 5;
+        const int ARMO_ID = 6;
+        const int SHVI_ID = 7;
+        const int DOSTAVKA_ID = 8;
+        const int FUNDAMENT_ID = 9;
+        const int KROVLYA_ID = 10;
+        const int OKNA_ID = 11;
+        const int DVER_ID = 12;
+
         public MainWindow()
         {
             InitializeComponent();
         }
-        
-        public int ConnectDB(int id)
+
+        public async Task<int> GetPriceByIdAsync(int id)
         {
             int resault = 0;
             using (AppContext appContext = new AppContext())
             {
-                var komplektObject = appContext.Prices.SingleOrDefault(el => el.Id == id);
-                if (komplektObject != null)
+                var komplektObject = await appContext.Prices.SingleOrDefaultAsync(el => el.Id == id);
+                if (komplektObject == null)
+                {
+                    throw new InvalidOperationException("Price is not found");
+                }
+                else
                 {
                     resault = komplektObject.Value;
                 }
@@ -117,22 +136,23 @@ namespace PolistirolbetonDomCalc
         }
 
         // Производство стенового комплекта с перегородсками - руб / м2
-        public void checkBox_steni_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_steni_Click(object sender, RoutedEventArgs e)
         {
-            int KOMPLEKT = ConnectDB(1);     // Передаем Id в базе данных
+            int KOMPLEKT = await GetPriceByIdAsync(KOMPLEKT_ID);
             int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
             pole1Res = check == true ? (pole *= KOMPLEKT) : (pole *= 0);
+
             steni_stoimost.Text = pole1Res.ToString("C", russianCulture);
             itogmetod();
         }
 
         // Проектирование дома с 3D моделью - руб/м2
-        public void checkBox_proekt_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_proekt_Click(object sender, RoutedEventArgs e)
         {
-            int PROEKT = ConnectDB(2);
+            int PROEKT = await GetPriceByIdAsync(PROEKT_ID);
             int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -143,9 +163,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Геология - руб
-        public void checkBox_geolog_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_geolog_Click(object sender, RoutedEventArgs e)
         {
-            int GEOLOGI = ConnectDB(3);
+            int GEOLOGI = await GetPriceByIdAsync(GEOLOGI_ID);
             int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -156,9 +176,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Геодезия - руб
-        public void checkBox_geodez_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_geodez_Click(object sender, RoutedEventArgs e)
         {
-            int GEODEZ = ConnectDB(4);
+            int GEODEZ = await GetPriceByIdAsync(GEODEZ_ID);
             int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -169,9 +189,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Монтаж домокомплекта - руб/м2
-        public void checkBox_montaj_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_montaj_Click(object sender, RoutedEventArgs e)
         {
-            int MONTAJDOM = ConnectDB(5);
+            int MONTAJDOM = await GetPriceByIdAsync(MONTAJDOM_ID);
             int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -182,9 +202,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Армопояс - руб/м2
-        public void checkBox_armo_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_armo_Click(object sender, RoutedEventArgs e)
         {
-            int ARMO = ConnectDB(6);
+            int ARMO = await GetPriceByIdAsync(ARMO_ID);
             int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -195,9 +215,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Обработка внешних и внетренних швов - руб/м2
-        public void checkBox_shvi_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_shvi_Click(object sender, RoutedEventArgs e)
         {
-            int SHVI = ConnectDB(7);
+            int SHVI = await GetPriceByIdAsync(SHVI_ID);
             int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -208,9 +228,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Доставка домокомплекта - руб/1 км
-        public void checkBox_dostavka_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_dostavka_Click(object sender, RoutedEventArgs e)
         {
-            int DOSTAVKA = ConnectDB(8);
+            int DOSTAVKA = await GetPriceByIdAsync(DOSTAVKA_ID);
             int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -221,9 +241,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Фундамент - руб/м2
-        public void checkBox_fundament_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_fundament_Click(object sender, RoutedEventArgs e)
         {
-            int FUNDAMENT = ConnectDB(9);
+            int FUNDAMENT = await GetPriceByIdAsync(FUNDAMENT_ID);
             int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -234,9 +254,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Кровля - руб/м2
-        public void checkBox_krovlya_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_krovlya_Click(object sender, RoutedEventArgs e)
         {
-            int KROVLYA = ConnectDB(10);
+            int KROVLYA = await GetPriceByIdAsync(KROVLYA_ID);
             int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -247,9 +267,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Окна - руб/м2
-        public void checkBox_okna_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_okna_Click(object sender, RoutedEventArgs e)
         {
-            int OKNA = ConnectDB(11);
+            int OKNA = await GetPriceByIdAsync(OKNA_ID);
             int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
@@ -260,9 +280,9 @@ namespace PolistirolbetonDomCalc
         }
 
         // Дверь входная - от руб.
-        public void checkBox_dver_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_dver_Click(object sender, RoutedEventArgs e)
         {
-            int DVER = ConnectDB(12);
+            int DVER = await GetPriceByIdAsync(DVER_ID);
             int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
