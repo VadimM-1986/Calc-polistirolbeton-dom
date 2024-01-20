@@ -224,8 +224,7 @@
                 <CheckBox Grid.Row="13" Grid.Column="0" x:Name="checkBox_krovlya" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_krovlya_Click"/>
                 <CheckBox Grid.Row="14" Grid.Column="0" x:Name="checkBox_okna" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_okna_Click"/>
                 <CheckBox Grid.Row="15" Grid.Column="0" x:Name="checkBox_dver" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_dver_Click"/>
-                <TextBlock Grid.Column="1" x:Name="checkBox_list" HorizontalAlignment="Center" Grid.Row="16" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Height="56" Width="250"/>
-            </Grid>
+                </Grid>
         </Border>
     </Border>
 </Window>
