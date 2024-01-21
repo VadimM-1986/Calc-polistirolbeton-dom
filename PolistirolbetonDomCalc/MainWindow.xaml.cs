@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using PolistirolbetonDomCalc.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,18 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Media.Animation;
 
 namespace PolistirolbetonDomCalc
 {
 
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
         // Передаем Id услуги
         const int KOMPLEKT_ID = 1;
         const int PROEKT_ID = 2;
@@ -36,6 +31,35 @@ namespace PolistirolbetonDomCalc
         const int KROVLYA_ID = 10;
         const int OKNA_ID = 11;
         const int DVER_ID = 12;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        public async Task<int> GetPriceByIdAsync(int id)
+        {
+            int resault = 0;
+            using (AppContext appContext = new AppContext())
+            {
+                var komplektObject = await appContext.Prices.SingleOrDefaultAsync(el => el.Id == id);
+                if (komplektObject == null)
+                {
+                    throw new InvalidOperationException("Price is not found");
+                }
+                else
+                {
+                    resault = komplektObject.Value;
+                }
+            }
+            return resault;
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
 
         // Устанавливаем локаль для России
         CultureInfo russianCulture = new CultureInfo("ru-RU");
@@ -57,17 +81,14 @@ namespace PolistirolbetonDomCalc
             pole11Res,
             pole12Res;
 
+        // ****************************************************
+
         // МЕТОДЫ:
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                DragMove();
-        }
 
         // Вызов метода при вводе площади дома
-        // ОЧИСТКА ПОЛЕЙ
         public void enterploshad_TextChanged(object sender, TextChangedEventArgs e)
         {
+            // ОЧИСТКА ПОЛЕЙ
             ploshad_value = 0;
             pole1Res = 0;
             pole2Res = 0;
@@ -115,14 +136,15 @@ namespace PolistirolbetonDomCalc
         }
 
         // Производство стенового комплекта с перегородсками - руб / м2
-        public  void checkBox_steni_Click(object sender, RoutedEventArgs e)
+        public async void checkBox_steni_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(KOMPLEKT_ID, ploshad_value);
-            var d = calculatorService.InitializeAsync();
+            int KOMPLEKT = await GetPriceByIdAsync(KOMPLEKT_ID);
+            int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole1Res = check == true ? calculatorService.CheckRes_1 : calculatorService.CheckRes_2;
+            pole1Res = check == true ? (pole *= KOMPLEKT) : (pole *= 0);
+
             steni_stoimost.Text = pole1Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -130,12 +152,12 @@ namespace PolistirolbetonDomCalc
         // Проектирование дома с 3D моделью - руб/м2
         public async void checkBox_proekt_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(PROEKT_ID, ploshad_value);
-            var d = calculatorService.InitializeAsync();
+            int PROEKT = await GetPriceByIdAsync(PROEKT_ID);
+            int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole2Res = check == true ? calculatorService.CheckRes_1 : calculatorService.CheckRes_2;
+            pole2Res = check == true ? (pole *= PROEKT) : (pole *= 0);
             proekt_stoimost.Text = pole2Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -143,12 +165,12 @@ namespace PolistirolbetonDomCalc
         // Геология - руб
         public async void checkBox_geolog_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(GEOLOGI_ID, ploshad_value);
-            var d = calculatorService.InitializePlus();
+            int GEOLOGI = await GetPriceByIdAsync(GEOLOGI_ID);
+            int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole3Res = check == true ? calculatorService.CheckRes_1_2 : calculatorService.CheckRes_2;
+            pole3Res = check == true ? (pole += GEOLOGI) : (pole *= 0);
             geologiya_stoimost.Text = pole3Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -156,12 +178,12 @@ namespace PolistirolbetonDomCalc
         // Геодезия - руб
         public async void checkBox_geodez_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(GEODEZ_ID, ploshad_value);
-            var d = calculatorService.InitializePlus();
+            int GEODEZ = await GetPriceByIdAsync(GEODEZ_ID);
+            int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole4Res = check == true ? calculatorService.CheckRes_1_2 : calculatorService.CheckRes_2;
+            pole4Res = check == true ? (pole += GEODEZ) : (pole *= 0);
             geodeziya_stoimost.Text = pole4Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -169,12 +191,12 @@ namespace PolistirolbetonDomCalc
         // Монтаж домокомплекта - руб/м2
         public async void checkBox_montaj_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(MONTAJDOM_ID, ploshad_value);
-            var d = calculatorService.InitializeAsync();
+            int MONTAJDOM = await GetPriceByIdAsync(MONTAJDOM_ID);
+            int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole5Res = check == true ? calculatorService.CheckRes_1 : calculatorService.CheckRes_2;
+            pole5Res = check == true ? (pole *= MONTAJDOM) : (pole *= 0);
             montaj_stoimost.Text = pole5Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -182,12 +204,12 @@ namespace PolistirolbetonDomCalc
         // Армопояс - руб/м2
         public async void checkBox_armo_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(ARMO_ID, ploshad_value);
-            var d = calculatorService.InitializeAsync();
+            int ARMO = await GetPriceByIdAsync(ARMO_ID);
+            int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole8Res = check == true ? calculatorService.CheckRes_1 : calculatorService.CheckRes_2;
+            pole8Res = check == true ? (pole *= ARMO) : (pole *= 0);
             armopoyas_stoimost.Text = pole8Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -195,12 +217,12 @@ namespace PolistirolbetonDomCalc
         // Обработка внешних и внетренних швов - руб/м2
         public async void checkBox_shvi_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(SHVI_ID, ploshad_value);
-            var d = calculatorService.InitializeAsync();
+            int SHVI = await GetPriceByIdAsync(SHVI_ID);
+            int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole7Res = check == true ? calculatorService.CheckRes_1 : calculatorService.CheckRes_2;
+            pole7Res = check == true ? (pole *= SHVI) : (pole *= 0);
             shvi_stoimost.Text = pole7Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -208,12 +230,12 @@ namespace PolistirolbetonDomCalc
         // Доставка домокомплекта - руб/1 км
         public async void checkBox_dostavka_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(DOSTAVKA_ID, ploshad_value);
-            var d = calculatorService.InitializeDeliveri(km_value);
+            int DOSTAVKA = await GetPriceByIdAsync(DOSTAVKA_ID);
+            int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole6Res = check == true ? calculatorService.CheckRes_1_4 : calculatorService.CheckRes_2;
+            pole6Res = check == true ? (pole += km_value * DOSTAVKA) : (pole *= 0);
             dostavka_stoimost.Text = pole6Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -221,12 +243,12 @@ namespace PolistirolbetonDomCalc
         // Фундамент - руб/м2
         public async void checkBox_fundament_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(FUNDAMENT_ID, ploshad_value);
-            var d = calculatorService.InitializeAsync();
+            int FUNDAMENT = await GetPriceByIdAsync(FUNDAMENT_ID);
+            int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole9Res = check == true ? calculatorService.CheckRes_1 : calculatorService.CheckRes_2;
+            pole9Res = check == true ? (pole *= FUNDAMENT) : (pole *= 0);
             fundament_stoimost.Text = pole9Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -234,12 +256,12 @@ namespace PolistirolbetonDomCalc
         // Кровля - руб/м2
         public async void checkBox_krovlya_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(KROVLYA_ID, ploshad_value);
-            var d = calculatorService.InitializeAsync();
+            int KROVLYA = await GetPriceByIdAsync(KROVLYA_ID);
+            int pole = ploshad_value;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole10Res = check == true ? calculatorService.CheckRes_1 : calculatorService.CheckRes_2;
+            pole10Res = check == true ? (pole *= KROVLYA) : (pole *= 0);
             krovlya_stoimost.Text = pole10Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -247,12 +269,12 @@ namespace PolistirolbetonDomCalc
         // Окна - руб/м2
         public async void checkBox_okna_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(OKNA_ID, ploshad_value);
-            var d = calculatorService.InitializePlusMulti(plOkon_value);
+            int OKNA = await GetPriceByIdAsync(OKNA_ID);
+            int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole11Res = check == true ? calculatorService.CheckRes_1_3 : calculatorService.CheckRes_2;
+            pole11Res = check == true ? (pole += OKNA * plOkon_value) : (pole *= 0);
             okna_stoimost.Text = pole11Res.ToString("C", russianCulture);
             itogmetod();
         }
@@ -260,12 +282,12 @@ namespace PolistirolbetonDomCalc
         // Дверь входная - от руб.
         public async void checkBox_dver_Click(object sender, RoutedEventArgs e)
         {
-            CalculatorService calculatorService = new CalculatorService(DVER_ID, ploshad_value);
-            var d = calculatorService.InitializePlus();
+            int DVER = await GetPriceByIdAsync(DVER_ID);
+            int pole = 0;
             CheckBox checkBox = (CheckBox)sender;
             bool check = checkBox.IsChecked.Value;
 
-            pole12Res = check == true ? calculatorService.CheckRes_1_2 : calculatorService.CheckRes_2;
+            pole12Res = check == true ? (pole += DVER) : (pole *= 0);
             dver_stoimost.Text = pole12Res.ToString("C", russianCulture);
         }
 
