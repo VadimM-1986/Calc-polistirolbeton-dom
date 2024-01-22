@@ -28,8 +28,8 @@ namespace PolistirolbetonDomCalc
         CultureInfo russianCulture = new CultureInfo("ru-RU");
 
         // Поля
-        int areaHouseValue,
-            km_value,
+        int areaHouseValueSquarMeter,
+            DistanceKilometersValue,
             filedWindowArea,
             filedWallsRes,
             filedProjectsRes,
@@ -54,7 +54,7 @@ namespace PolistirolbetonDomCalc
         // Вызов метода при вводе площади дома (ОЧИСТКА ПОЛЕЙ)
         public void enterploshad_TextChanged(object sender, TextChangedEventArgs e)
         {
-            areaHouseValue = 0;
+            areaHouseValueSquarMeter = 0;
             filedWallsRes = 0;
             filedProjectsRes = 0;
             filedGeologyRes = 0;
@@ -97,7 +97,7 @@ namespace PolistirolbetonDomCalc
             door_cost.Text = 0.ToString("C", russianCulture);
 
             TextBox textBox = (TextBox)sender;
-            areaHouseValue = textBox.Text == "" ? 0 : Convert.ToInt32(textBox.Text);
+            areaHouseValueSquarMeter = textBox.Text == "" ? 0 : Convert.ToInt32(textBox.Text);
         }
 
         // Производство стенового комплекта с перегородсками - руб / м2
@@ -107,7 +107,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedWallsRes = await calculatorService.GetWallsCost(areaHouseValue);
+                filedWallsRes = await calculatorService.GetWallsCost(areaHouseValueSquarMeter);
             }
             else
             {
@@ -124,7 +124,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedProjectsRes = await calculatorService.GetProjectsCost(areaHouseValue);
+                filedProjectsRes = await calculatorService.GetProjectsCost(areaHouseValueSquarMeter);
             }
             else
             {
@@ -141,7 +141,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedGeologyRes = await calculatorService.GetGeologyCost(areaHouseValue);
+                filedGeologyRes = await calculatorService.GetGeologyCost(areaHouseValueSquarMeter);
             }
             else
             {
@@ -158,7 +158,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedGeodesyRes = await calculatorService.GetGeodesyCost(areaHouseValue);
+                filedGeodesyRes = await calculatorService.GetGeodesyCost(areaHouseValueSquarMeter);
             }
             else
             {
@@ -175,7 +175,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedConstructionRes = await calculatorService.GetConstructionCost(areaHouseValue);
+                filedConstructionRes = await calculatorService.GetConstructionCost(areaHouseValueSquarMeter);
             }
             else
             {
@@ -192,7 +192,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedArmoRes = await calculatorService.GetArmoCost(areaHouseValue);
+                filedArmoRes = await calculatorService.GetArmoCost(areaHouseValueSquarMeter);
             }
             else
             {
@@ -209,7 +209,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedSeamsRes = await calculatorService.GetSeamsCost(areaHouseValue);
+                filedSeamsRes = await calculatorService.GetSeamsCost(areaHouseValueSquarMeter);
             }
             else
             {
@@ -223,7 +223,7 @@ namespace PolistirolbetonDomCalc
         private void km_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            km_value = textBox.Text == "" ? 0 : Convert.ToInt32(textBox.Text);
+            DistanceKilometersValue = textBox.Text == "" ? 0 : Convert.ToInt32(textBox.Text);
         }
         // Доставка домокомплекта - руб/1 км
         public async void checkBox_delivery_Click(object sender, RoutedEventArgs e)
@@ -232,7 +232,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedDeliveryRes = await calculatorService.GetDeliveryCost(areaHouseValue, km_value);
+                filedDeliveryRes = await calculatorService.GetDeliveryCost(areaHouseValueSquarMeter, DistanceKilometersValue);
                 if (filedDeliveryRes == 0)
                 {
                     checkBox_delivery.IsChecked = false;
@@ -253,7 +253,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedFundationRes = await calculatorService.GetFundationCost(areaHouseValue);
+                filedFundationRes = await calculatorService.GetFundationCost(areaHouseValueSquarMeter);
             }
             else
             {
@@ -270,7 +270,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedRoofRes = await calculatorService.GetRoofCost(areaHouseValue);
+                filedRoofRes = await calculatorService.GetRoofCost(areaHouseValueSquarMeter);
             }
             else
             {
@@ -293,7 +293,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedWindowsRes = await calculatorService.GetWindowsCost(areaHouseValue, filedWindowArea);
+                filedWindowsRes = await calculatorService.GetWindowsCost(areaHouseValueSquarMeter, filedWindowArea);
                 if (filedWindowsRes == 0)
                 {
                     checkBox_windows.IsChecked = false;
@@ -314,7 +314,7 @@ namespace PolistirolbetonDomCalc
             bool check = checkBox.IsChecked.Value;
             if (check == true)
             {
-                filedDoorRes = await calculatorService.GetDoorCost(areaHouseValue);
+                filedDoorRes = await calculatorService.GetDoorCost(areaHouseValueSquarMeter);
             }
             else
             {
