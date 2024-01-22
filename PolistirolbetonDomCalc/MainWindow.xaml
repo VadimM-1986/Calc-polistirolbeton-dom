@@ -169,7 +169,7 @@
                 <TextBlock Grid.Row="13" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 20 0">Кровля:</TextBlock>
                 <TextBlock Grid.Row="14" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 20 0">Окна Rehau (профиль 70 мм):</TextBlock>
                 <TextBlock Grid.Row="15" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 20 0">Дверь с терморазрывом:</TextBlock>
-                <TextBlock Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="4" FontSize="9" Foreground="#B0B0B0" VerticalAlignment="Center" Margin="30 10 20 0">Version 0.1 © NNORG Group, 2023</TextBlock>
+                <TextBlock Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="4" FontSize="9" Foreground="#B0B0B0" VerticalAlignment="Center" Margin="30 10 20 0">Version 0.3 © NNORG Group, 2023</TextBlock>
 
                 <TextBlock Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Margin="10 0 20 0">650 руб. м²</TextBlock>
                 <TextBlock Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Margin="10 0 20 0">40 000 руб.</TextBlock>
@@ -188,42 +188,42 @@
 
                 <!-- Поля ввода -->
                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="enterploshad" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#5f5c5c" FontWeight="Bold" BorderThickness="1" Margin="80 0 20 0" Width="35" TextChanged="enterploshad_TextChanged" Text=""/>
-                <TextBox Grid.Row="1" Grid.Column="3" x:Name="km" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#5f5c5c" FontWeight="Bold" BorderThickness="1" Margin="10 0 20 0" Width="35" TextChanged="km_TextChanged" Text=""/>
-                <TextBox Grid.Row="2" Grid.Column="3" x:Name="plOkon" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#5f5c5c" FontWeight="Bold" BorderThickness="1" Margin="10 0 20 0" Width="35" TextChanged="plOkon_TextChanged" Text=""/>
+                <TextBox Grid.Row="1" Grid.Column="3" x:Name="е" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#5f5c5c" FontWeight="Bold" BorderThickness="1" Margin="10 0 20 0" Width="35" TextChanged="km_TextChanged" Text=""/>
+                <TextBox Grid.Row="2" Grid.Column="3" x:Name="н" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#5f5c5c" FontWeight="Bold" BorderThickness="1" Margin="10 0 20 0" Width="35" TextChanged="filed_windown_TextChanged" Text=""/>
 
                 <!-- Поля вывода -->
-                <TextBox Grid.Row="4" Grid.Column="3" x:Name="proekt_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="5" Grid.Column="3" x:Name="geologiya_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="6" Grid.Column="3" x:Name="geodeziya_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="7" Grid.Column="3" x:Name="steni_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="8" Grid.Column="3" x:Name="montaj_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="11" Grid.Column="3" x:Name="dostavka_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="10" Grid.Column="3" x:Name="shvi_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="9" Grid.Column="3" x:Name="armopoyas_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="12" Grid.Column="3" x:Name="fundament_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="13" Grid.Column="3" x:Name="krovlya_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="14" Grid.Column="3" x:Name="okna_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
-                <TextBox Grid.Row="15" Grid.Column="3" x:Name="dver_stoimost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="4" Grid.Column="3" x:Name="project_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="5" Grid.Column="3" x:Name="geology_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="6" Grid.Column="3" x:Name="geodesy_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="7" Grid.Column="3" x:Name="wall_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="8" Grid.Column="3" x:Name="construction_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="11" Grid.Column="3" x:Name="delivery_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="10" Grid.Column="3" x:Name="seams_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="9" Grid.Column="3" x:Name="armo_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="12" Grid.Column="3" x:Name="fundation_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="13" Grid.Column="3" x:Name="roof_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="14" Grid.Column="3" x:Name="windows_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
+                <TextBox Grid.Row="15" Grid.Column="3" x:Name="door_cost" VerticalAlignment="Center" Foreground="#fff" Background="Transparent" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True">0,00 ₽</TextBox>
 
-                <TextBox Grid.Row="16" Grid.Column="3" Grid.ColumnSpan="3" x:Name="itogstoimost" VerticalAlignment="Center" Background="Transparent" Foreground="#fff" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True" FontSize="20" >0,00 ₽</TextBox>
+                <TextBox Grid.Row="16" Grid.Column="3" Grid.ColumnSpan="3" x:Name="final_cost" VerticalAlignment="Center" Background="Transparent" Foreground="#fff" FontWeight="Bold" BorderThickness="0" Margin="10 0 20 0" IsReadOnly="True" FontSize="20" >0,00 ₽</TextBox>
 
 
 
 
                 <!-- Чекбоксы -->
-                <CheckBox Grid.Row="4" Grid.Column="0" x:Name="checkBox_proekt" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_proekt_Click"/>
-                <CheckBox Grid.Row="5" Grid.Column="0" x:Name="checkBox_geolog" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_geolog_Click"/>
-                <CheckBox Grid.Row="6" Grid.Column="0" x:Name="checkBox_geodez" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_geodez_Click"/>
+                <CheckBox Grid.Row="4" Grid.Column="0" x:Name="checkBox_project" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_project_Click"/>
+                <CheckBox Grid.Row="5" Grid.Column="0" x:Name="checkBox_geology" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_geology_Click"/>
+                <CheckBox Grid.Row="6" Grid.Column="0" x:Name="checkBox_geodesy" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_geodesy_Click"/>
                 <CheckBox Grid.Row="2" Grid.Column="1" x:Name="checkBox6" IsThreeState="False" IsChecked="True" Height="20" Content="1 этаж" IsEnabled="False" Foreground="#fff" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60 7 20 0"/>
-                <CheckBox Grid.Row="7" Grid.Column="0" x:Name="checkBox_steni" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_steni_Click"/>
-                <CheckBox Grid.Row="8" Grid.Column="0" x:Name="checkBox_motntaj" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_montaj_Click"/>
-                <CheckBox Grid.Row="10" Grid.Column="0" x:Name="checkBox_shvi" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_shvi_Click"/>
+                <CheckBox Grid.Row="7" Grid.Column="0" x:Name="checkBox_walls" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_walls_Click"/>
+                <CheckBox Grid.Row="8" Grid.Column="0" x:Name="checkBox_construction" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_construction_Click"/>
+                <CheckBox Grid.Row="10" Grid.Column="0" x:Name="checkBox_seams" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_seams_Click"/>
                 <CheckBox Grid.Row="9" Grid.Column="0" x:Name="checkBox_armo" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_armo_Click"/>
-                <CheckBox Grid.Row="11" Grid.Column="0" x:Name="checkBox_dostavka" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_dostavka_Click"/>
-                <CheckBox Grid.Row="12" Grid.Column="0" x:Name="checkBox_fundament" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_fundament_Click"/>
-                <CheckBox Grid.Row="13" Grid.Column="0" x:Name="checkBox_krovlya" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_krovlya_Click"/>
-                <CheckBox Grid.Row="14" Grid.Column="0" x:Name="checkBox_okna" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_okna_Click"/>
-                <CheckBox Grid.Row="15" Grid.Column="0" x:Name="checkBox_dver" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_dver_Click"/>
+                <CheckBox Grid.Row="11" Grid.Column="0" x:Name="checkBox_delivery" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_delivery_Click"/>
+                <CheckBox Grid.Row="12" Grid.Column="0" x:Name="checkBox_fundation" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_fundation_Click"/>
+                <CheckBox Grid.Row="13" Grid.Column="0" x:Name="checkBox_roof" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_roof_Click"/>
+                <CheckBox Grid.Row="14" Grid.Column="0" x:Name="checkBox_windows" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_windows_Click"/>
+                <CheckBox Grid.Row="15" Grid.Column="0" x:Name="checkBox_door" IsThreeState="False" IsChecked="False" Height="20" VerticalAlignment="Center" Margin="30 7 20 0" Click="checkBox_door_Click"/>
                 </Grid>
         </Border>
     </Border>

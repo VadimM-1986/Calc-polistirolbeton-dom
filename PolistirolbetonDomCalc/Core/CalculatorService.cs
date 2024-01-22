@@ -5,49 +5,129 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PolistirolbetonDomCalc
 {
     public class CalculatorService
     {
         // Бизнес логика
-        public int Service_Id { get; set; } // ID
-        public int Input_square { get; set; } // Площадь дома
-        public int CheckRes_1 { get; set; } // Умножение
-        public int CheckRes_1_2 { get; set; } // Прибовление
-        public int CheckRes_1_3 { get; set; } // Прибовление и умножение
-        public int CheckRes_1_4 { get; set; } // Прибовление и умножение
-        public int CheckRes_2 {  get; set; } // 0
 
-        public CalculatorService(int Id, int Input_filed) 
+        // Передаем Id услуги
+        const int SETWALLS_ID = 1;
+        const int PROJECT_ID = 2;
+        const int GEOLOGI_ID = 3;
+        const int GEODESY_ID = 4;
+        const int CONSTRUCTION_ID = 5;
+        const int ARMO_ID = 6;
+        const int SEAMS_ID = 7;
+        const int DELIVERY_ID = 8;
+        const int FUNDATION_ID = 9;
+        const int ROOF_ID = 10;
+        const int WINDOWS_ID = 11;
+        const int DOOR_ID = 12;
+
+  
+        public async Task<int> GetWallsCost(int areaHouseValue)
         {
-            this.Service_Id = Id;
-            this.Input_square = Input_filed;
+            int ServicePrice = await GetPriceByIdAsync(SETWALLS_ID);
+            int resultCost = areaHouseValue *= ServicePrice - areaHouseValue;
+            return resultCost;
         }
 
-        public async Task InitializeAsync()
+        public async Task<int> GetProjectsCost(int areaHouseValue)
         {
-            int ServicePrice = await GetPriceByIdAsync(Service_Id);
-            this.CheckRes_1 = Input_square *= ServicePrice - Input_square;
-            this.CheckRes_2 = Input_square *= 0;
+            int ServicePrice = await GetPriceByIdAsync(PROJECT_ID);
+            int resultCost = areaHouseValue *= ServicePrice - areaHouseValue;
+            return resultCost;
         }
-        public async Task InitializePlus()
+
+        public async Task<int> GetGeologyCost(int areaHouseValue)
         {
-            int ServicePrice = await GetPriceByIdAsync(Service_Id);
-            this.CheckRes_1_2 = Input_square += ServicePrice - Input_square;
-            this.CheckRes_2 = Input_square *= 0;
+            int ServicePrice = await GetPriceByIdAsync(GEOLOGI_ID);
+            int resultCost = areaHouseValue += ServicePrice - areaHouseValue;
+            return resultCost;
         }
-        public async Task InitializePlusMulti(int plOkon_value )
+
+        public async Task<int> GetGeodesyCost(int areaHouseValue)
         {
-            int ServicePrice = await GetPriceByIdAsync(Service_Id);
-            this.CheckRes_1_3 = Input_square += ServicePrice * plOkon_value - Input_square;
-            this.CheckRes_2 = Input_square *= 0;
+            int ServicePrice = await GetPriceByIdAsync(GEODESY_ID);
+            int resultCost = areaHouseValue += ServicePrice - areaHouseValue;
+            return resultCost;
         }
-        public async Task InitializeDeliveri(int km_value)
+
+        public async Task<int> GetConstructionCost(int areaHouseValue)
         {
-            int ServicePrice = await GetPriceByIdAsync(Service_Id);
-            this.CheckRes_1_4 = Input_square += km_value * ServicePrice - Input_square;
-            this.CheckRes_2 = Input_square *= 0;
+            int ServicePrice = await GetPriceByIdAsync(CONSTRUCTION_ID);
+            int resultCost = areaHouseValue *= ServicePrice - areaHouseValue;
+            return resultCost;
+        }
+
+        public async Task<int> GetArmoCost(int areaHouseValue)
+        {
+            int ServicePrice = await GetPriceByIdAsync(ARMO_ID);
+            int resultCost = areaHouseValue *= ServicePrice - areaHouseValue;
+            return resultCost;
+        }
+
+        public async Task<int> GetSeamsCost(int areaHouseValue)
+        {
+            int ServicePrice = await GetPriceByIdAsync(SEAMS_ID);
+            int resultCost = areaHouseValue *= ServicePrice - areaHouseValue;
+            return resultCost;
+        }
+
+        public async Task<int> GetDeliveryCost(int areaHouseValue, int km_value)
+        {
+            if (km_value != 0)
+            {
+                int ServicePrice = await GetPriceByIdAsync(DELIVERY_ID);
+                int resultCost = areaHouseValue += km_value * ServicePrice - areaHouseValue;
+                return resultCost;
+            } 
+            else
+            {
+                MessageBox.Show("Enter distance of the object!");
+                return 0;
+            }
+        }
+
+        public async Task<int> GetFundationCost(int areaHouseValue)
+        {
+            int ServicePrice = await GetPriceByIdAsync(FUNDATION_ID);
+            int resultCost = areaHouseValue *= ServicePrice - areaHouseValue;
+            return resultCost;
+        }
+
+        public async Task<int> GetRoofCost(int areaHouseValue)
+        {
+            int ServicePrice = await GetPriceByIdAsync(ROOF_ID);
+            int resultCost = areaHouseValue *= ServicePrice - areaHouseValue;
+            return resultCost;
+        }
+
+        public async Task<int> GetWindowsCost(int areaHouseValue, int filedWindowArea)
+        {
+
+            if (filedWindowArea != 0)
+            {
+                int ServicePrice = await GetPriceByIdAsync(WINDOWS_ID);
+                int resultCost = areaHouseValue += ServicePrice * filedWindowArea - areaHouseValue;
+                return resultCost;  
+            } 
+            else 
+            {
+                MessageBox.Show("Enter the area m² of the windows!");
+                return 0;
+            }
+
+        }
+
+        public async Task<int> GetDoorCost(int areaHouseValue)
+        {
+            int ServicePrice = await GetPriceByIdAsync(DOOR_ID);
+            int resultCost = areaHouseValue += ServicePrice - areaHouseValue;
+            return resultCost;
         }
 
 
@@ -69,8 +149,6 @@ namespace PolistirolbetonDomCalc
             }
             return resault;
         }
-
-
 
     }
 }
