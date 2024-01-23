@@ -28,101 +28,94 @@ namespace PolistirolbetonDomCalc
         const int DOOR_ID = 12;
 
   
-        public async Task<int> GetWallsCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetWallsCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(SETWALLS_ID);
-            int resultCost = areaHouseValueSquarMeter * servicePrice;
+            int resultCost = areaHouseSquarMeters * servicePrice;
             return resultCost;
         }
 
-        public async Task<int> GetProjectsCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetProjectsCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(PROJECT_ID);
-            int resultCost = areaHouseValueSquarMeter * servicePrice;
+            int resultCost = areaHouseSquarMeters * servicePrice;
             return resultCost;
         }
 
-        public async Task<int> GetGeologyCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetGeologyCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(GEOLOGI_ID);
-            int resultCost = areaHouseValueSquarMeter + servicePrice - areaHouseValueSquarMeter;
+            int resultCost = areaHouseSquarMeters + servicePrice - areaHouseSquarMeters;
             return resultCost;
         }
 
-        public async Task<int> GetGeodesyCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetGeodesyCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(GEODESY_ID);
-            int resultCost = areaHouseValueSquarMeter + servicePrice - areaHouseValueSquarMeter;
+            int resultCost = areaHouseSquarMeters + servicePrice - areaHouseSquarMeters;
             return resultCost;
         }
 
-        public async Task<int> GetConstructionCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetConstructionCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(CONSTRUCTION_ID);
-            int resultCost = areaHouseValueSquarMeter * servicePrice;
+            int resultCost = areaHouseSquarMeters * servicePrice;
             return resultCost;
         }
 
-        public async Task<int> GetArmoCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetArmoCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(ARMO_ID);
-            int resultCost = areaHouseValueSquarMeter * servicePrice;
+            int resultCost = areaHouseSquarMeters * servicePrice;
             return resultCost;
         }
 
-        public async Task<int> GetSeamsCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetSeamsCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(SEAMS_ID);
-            int resultCost = areaHouseValueSquarMeter * servicePrice;
+            int resultCost = areaHouseSquarMeters * servicePrice;
             return resultCost;
         }
 
-        public async Task<int> GetDeliveryCost(int areaHouseValueSquarMeter, int DistanceKilometersValue)
+        public async Task<int> GetDeliveryCost(int areaHouseSquarMeters, int distanceKilometers)
         { 
-            if (DistanceKilometersValue != 0)
+            if (distanceKilometers <= 0)
             {
-                int servicePrice = await GetPriceByIdAsync(DELIVERY_ID);
-                int resultCost = areaHouseValueSquarMeter + DistanceKilometersValue * servicePrice - areaHouseValueSquarMeter;
-                return resultCost;
+                throw new ArgumentException("Incorrect value of the variable Distance! Should be greater than 0!", nameof (distanceKilometers));
             }
-            else
-            {
-                throw new Exception("Enter distance of the object!");
-            }
+            int servicePrice = await GetPriceByIdAsync(DELIVERY_ID);
+            int resultCost = areaHouseSquarMeters + distanceKilometers * servicePrice - areaHouseSquarMeters;
+            return resultCost;
         }
 
-        public async Task<int> GetFundationCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetFundationCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(FUNDATION_ID);
-            int resultCost = areaHouseValueSquarMeter * servicePrice;
+            int resultCost = areaHouseSquarMeters * servicePrice;
             return resultCost;
         }
 
-        public async Task<int> GetRoofCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetRoofCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(ROOF_ID);
-            int resultCost = areaHouseValueSquarMeter * servicePrice;
+            int resultCost = areaHouseSquarMeters * servicePrice;
             return resultCost;
         }
 
-        public async Task<int> GetWindowsCost(int areaHouseValueSquarMeter, int filedWindowArea)
+        public async Task<int> GetWindowsCost(int areaHouseSquarMeters, int filedWindowArea)
         {
-            if (filedWindowArea != 0)
+            if (filedWindowArea <= 0)
             {
-                int servicePrice = await GetPriceByIdAsync(WINDOWS_ID);
-                int resultCost = areaHouseValueSquarMeter + servicePrice * filedWindowArea - areaHouseValueSquarMeter;
-                return resultCost;
+                throw new ArgumentException("Incorrect value of the Window variable! Must be greater than 0!", nameof (filedWindowArea));
             }
-            else
-            {
-                throw new Exception("Enter the area m² of the windows!");
-            }
+            int servicePrice = await GetPriceByIdAsync(WINDOWS_ID);
+            int resultCost = areaHouseSquarMeters + servicePrice * filedWindowArea - areaHouseSquarMeters;
+            return resultCost;
         }
-
-        public async Task<int> GetDoorCost(int areaHouseValueSquarMeter)
+        public async Task<int> GetDoorCost(int areaHouseSquarMeters)
         {
             int servicePrice = await GetPriceByIdAsync(DOOR_ID);
-            int resultCost = areaHouseValueSquarMeter + servicePrice - areaHouseValueSquarMeter;
+            int resultCost = areaHouseSquarMeters + servicePrice - areaHouseSquarMeters;
             return resultCost;
         }
 
