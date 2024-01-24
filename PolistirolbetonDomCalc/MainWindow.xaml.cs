@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using PolistirolbetonDomCalc.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Media.Animation;
 
 namespace PolistirolbetonDomCalc
 {
@@ -19,11 +19,11 @@ namespace PolistirolbetonDomCalc
     public partial class MainWindow : Window
     {
         public readonly CalculatorService calculatorService = new CalculatorService();
+
         public MainWindow()
         {
             InitializeComponent();
         }
-
         // Устанавливаем локаль для России
         CultureInfo russianCulture = new CultureInfo("ru-RU");
 
@@ -331,10 +331,6 @@ namespace PolistirolbetonDomCalc
             final_cost.Text = allCost.ToString("C", russianCulture);
         }
 
-
-
-
-
         // Кнопка свернуть
         private void btnMiniMizi_Click(object sender, RoutedEventArgs e)
         {
@@ -346,7 +342,5 @@ namespace PolistirolbetonDomCalc
         {
             Application.Current.Shutdown();
         }
-
-
     }
 }
