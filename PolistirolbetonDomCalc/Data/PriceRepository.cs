@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PolistirolbetonDomCalc
-{
+{ 
     class PriceRepository : IPriceRepository
     {
         // Соединение с БД

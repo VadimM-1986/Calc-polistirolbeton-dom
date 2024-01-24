@@ -11,3 +11,4 @@ namespace PolistirolbetonDomCalc.Core
         Task<int> GetPriceByIdAsync(int id);
     }
 }
+

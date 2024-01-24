@@ -123,9 +123,5 @@ namespace PolistirolbetonDomCalc
 
 
 
-
-
-
-
     }
 }
