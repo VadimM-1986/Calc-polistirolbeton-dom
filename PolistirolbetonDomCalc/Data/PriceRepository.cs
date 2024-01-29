@@ -1,34 +1,33 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PolistirolbetonDomCalc.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PolistirolbetonDomCalc
-{ 
-    class PriceRepository : IPriceRepository
+namespace PolistirolbetonDomCalc;
+
+public class PriceRepository : IPriceRepository
+{
+    private readonly AppContext _context;
+
+    public PriceRepository(AppContext context)
     {
-        // Соединение с БД
-        public async Task<int> GetPriceByIdAsync(int id)
+        _context = context;
+    }
+
+    // Соединение с БД
+    public async Task<int> GetPriceByIdAsync(int id)
+    {
+        int resault = 0;
+
+        var komplektObject = await _context.Prices.SingleOrDefaultAsync(el => el.Id == id);
+
+        if (komplektObject == null)
         {
-            int resault = 0;
-            using (AppContext appContext = new AppContext())
-            {
-                var komplektObject = await appContext.Prices.SingleOrDefaultAsync(el => el.Id == id);
-                if (komplektObject == null)
-                {
-                    throw new InvalidOperationException("Price is not found");
-                }
-                else
-                {
-                    resault = komplektObject.Value;
-                }
-            }
-            return resault;
+            throw new InvalidOperationException($"Price is not found ID: {id}");
+        }
+        else
+        {
+            resault = komplektObject.Value;
         }
 
-
+        return resault;
     }
 }

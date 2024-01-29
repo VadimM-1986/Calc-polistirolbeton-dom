@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PolistirolbetonDomCalc.Core
+namespace PolistirolbetonDomCalc.Core;
+
+public interface IPriceRepository
 {
-    interface IPriceRepository
-    {
-        Task<int> GetPriceByIdAsync(int id);
-    }
+    Task<int> GetPriceByIdAsync(int id);
 }
 

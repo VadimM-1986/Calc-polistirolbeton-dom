@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolistirolbetonDomCalc", "PolistirolbetonDomCalc\PolistirolbetonDomCalc.csproj", "{A3748FBC-9DEA-40CC-82C1-8ECB8A6FBC65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolistirolbetonDomCalc", "PolistirolbetonDomCalc\PolistirolbetonDomCalc.csproj", "{A3748FBC-9DEA-40CC-82C1-8ECB8A6FBC65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolistirolbetonDomCalc.Tests", "PolistirolbetonDomCalc.Tests\PolistirolbetonDomCalc.Tests.csproj", "{52E83645-BDB0-4E98-AC32-AC3F2E87F271}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A3748FBC-9DEA-40CC-82C1-8ECB8A6FBC65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3748FBC-9DEA-40CC-82C1-8ECB8A6FBC65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3748FBC-9DEA-40CC-82C1-8ECB8A6FBC65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52E83645-BDB0-4E98-AC32-AC3F2E87F271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E83645-BDB0-4E98-AC32-AC3F2E87F271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E83645-BDB0-4E98-AC32-AC3F2E87F271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E83645-BDB0-4E98-AC32-AC3F2E87F271}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
